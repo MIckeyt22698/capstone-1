@@ -9,19 +9,11 @@ public class Transactions {
     String vendor;
     double amount;
 
-    public Transactions(LocalDateTime transTime, double amount, String vendor, String description) {
-        this.transTime = transTime;
+    public Transactions(double amount, String vendor, String description) {
+        this.transTime = LocalDateTime.now();
         this.amount = amount;
         this.vendor = vendor;
         this.description = description;
-    }
-
-    public LocalDateTime getTransTime() {
-        return transTime;
-    }
-
-    public void setTransTime(LocalDateTime transTime) {
-        this.transTime = transTime;
     }
 
     public double getAmount() {
@@ -53,8 +45,9 @@ public class Transactions {
         return transTime.format(formatter);
     }
 
+
     @Override
     public String toString() {
-        return String.format("%s | %-15s | %-10s | $%.2f", getFormattedDate(), vendor, description, amount);
+        return String.format("%s | %-15s | %-10s | $%.2f",getFormattedDate(), vendor, description, amount);
     }
 }
