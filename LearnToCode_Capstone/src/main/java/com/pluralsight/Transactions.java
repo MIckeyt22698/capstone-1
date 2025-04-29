@@ -40,6 +40,14 @@ public class Transactions {
         this.description = description;
     }
 
+    public void setTransTime(LocalDateTime transTime) {
+        this.transTime = transTime;
+    }
+
+    public LocalDateTime getTransTime() {
+        return transTime;
+    }
+
     public String getFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
         return transTime.format(formatter);

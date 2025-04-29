@@ -131,7 +131,8 @@ public class App {
             System.out.println("1) View All Transactions");
             System.out.println("2) View Deposits Only");
             System.out.println("3) View Payments Only");
-            System.out.println("4) Return to Home Screen");
+            System.out.println("4) View Reports");
+            System.out.println("5) Return to Home Screen");
             System.out.print("Select an option: ");
 
             int choice = keystrokes.nextInt();
@@ -148,6 +149,9 @@ public class App {
                     printPaymentsOnly();
                     break;
                 case 4:
+                    viewReports(); // New reports menu
+                    break;
+                case 5:
                     viewing = false; // exit the ledger menu
                     break;
                 default:
@@ -155,8 +159,107 @@ public class App {
             }
         }
     }
+    public static void viewReports() {
+        boolean viewingReports = true;
 
+        while (viewingReports) {
+            System.out.println("\n=== Reports Menu ===");
+            System.out.println("1) Month To Date");
+            System.out.println("2) Previous Month");
+            System.out.println("3) Year To Date");
+            System.out.println("4) Previous Year");
+            System.out.println("5) Search by Vendor");
+            System.out.println("0) Back to Ledger Menu");
+            System.out.print("Select an option: ");
 
+            int reportChoice = keystrokes.nextInt();
+            keystrokes.nextLine(); // consume leftover newline
+
+            switch (reportChoice) {
+                case 1:
+                    showMonthToDate();
+                    break;
+                case 2:
+                    showPreviousMonth();
+                    break;
+                case 3:
+                    showYearToDate();
+                    break;
+                case 4:
+                    showPreviousYear();
+                    break;
+                case 5:
+                    searchByVendor();
+                    break;
+                case 0:
+                    viewingReports = false; // exit the reports menu
+                    break;
+                default:
+                    System.out.println("Invalid menu option. Try again.");
+            }
+        }
+    }
+    public static void showMonthToDate() {
+        System.out.println("\n=== Month To Date ===");
+        LocalDateTime now = LocalDateTime.now();
+        int currentMonth = now.getMonthValue();
+        int currentYear = now.getYear();
+
+        for (Transactions t : ledger) {
+            if (t.getTransTime().getMonthValue() == currentMonth && t.getTransTime().getYear() == currentYear) {
+                printTransaction(t);
+            }
+        }
+    }
+
+    public static void showPreviousMonth() {
+        System.out.println("\n=== Previous Month ===");
+        LocalDateTime now = LocalDateTime.now();
+        int previousMonth = now.minusMonths(1).getMonthValue();
+        int previousYear = now.minusMonths(1).getYear();
+
+        for (Transactions t : ledger) {
+            if (t.getTransTime().getMonthValue() == previousMonth && t.getTransTime().getYear() == previousYear) {
+                printTransaction(t);
+            }
+        }
+    }
+
+    public static void showYearToDate() {
+        System.out.println("\n=== Year To Date ===");
+        LocalDateTime now = LocalDateTime.now();
+        int currentYear = now.getYear();
+
+        for (Transactions t : ledger) {
+            if (t.getTransTime().getYear() == currentYear) {
+                printTransaction(t);
+            }
+        }
+    }
+
+    public static void showPreviousYear() {
+        System.out.println("\n=== Previous Year ===");
+        LocalDateTime now = LocalDateTime.now();
+        int previousYear = now.minusYears(1).getYear();
+
+        for (Transactions t : ledger) {
+            if (t.getTransTime().getYear() == previousYear) {
+                printTransaction(t);
+            }
+        }
+    }
+
+    public static void searchByVendor() {
+        System.out.print("Enter vendor name to search: ");
+        String vendor = keystrokes.nextLine().toLowerCase();
+
+        System.out.println("\n=== Search Results for Vendor: " + vendor + " ===");
+        for (Transactions t : ledger) {
+            if (t.getVendor().toLowerCase().contains(vendor)) {
+                printTransaction(t);
+            }
+        }
+    }
 
 public static void printAllTransactions() {
     System.out.println("\n=== All Transactions ===");
