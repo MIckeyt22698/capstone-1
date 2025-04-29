@@ -1,5 +1,9 @@
 package com.pluralsight;
 
+import java.io.*;
+import java.nio.Buffer;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +14,7 @@ public class App {
 
 
     public static void main(String[] args) {
+        loadTransactions();
 
 //      keeps the program running until the user chooses to exit.
         boolean running = true;
@@ -40,6 +45,29 @@ public class App {
             }
         }
     }
+    public static void loadTransactions() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("ledger.csv"))) {
+            String line;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|", 4); // use pipe as separator
+                if (parts.length == 4) {
+                    LocalDateTime date = LocalDateTime.parse(parts[0].trim(), formatter);
+                    String vendor = parts[1].trim();
+                    String description = parts[2].trim();
+                    double amount = Double.parseDouble(parts[3].trim());
+
+                    Transactions t = new Transactions(LocalDateTime.now(), amount, vendor, description);
+                    ledger.add(t);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No ledger file found. A new one will be created.");
+        } catch (IOException e) {
+            System.out.println("Error reading from file: " + e.getMessage());
+        }
+    }
 
 
     public static void homeScreen() {
@@ -63,7 +91,7 @@ public class App {
         System.out.print("Enter description: ");
         String description = keystrokes.nextLine();
 
-        Transactions newDeposit = new Transactions(amount, vendor, description);
+        Transactions newDeposit = new Transactions(LocalDateTime.now(), amount, vendor, description);
         saveTransaction(newDeposit);
 
         promptReturnToMenu();
@@ -83,7 +111,7 @@ public class App {
         String description = keystrokes.nextLine();
 
         // Payments are negative amounts
-        Transactions newPayment = new Transactions(-amount, vendor, description);
+        Transactions newPayment = new Transactions(LocalDateTime.now(),-amount, vendor, description);
         saveTransaction(newPayment);
 
         promptReturnToMenu();
@@ -161,6 +189,7 @@ public static void printPaymentsOnly() {
 
 public static void printTransaction(Transactions t) {
     System.out.printf("%s | %s | %s | $%.2f\n",
+            t.getFormattedDate(),
             t.getVendor(),
             t.getDescription(),
             t.getAmount());
@@ -174,6 +203,22 @@ public static void promptReturnToMenu() {
 
 public static void saveTransaction(Transactions transaction) {
     ledger.add(transaction); // Still need CSV DONT FORGET!
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("ledger.csv", true))) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
+
+        // Writes the transaction as a line in the CSV file
+        String line = String.format("%s | %s | %s | %.2f",
+                transaction.getFormattedDate(),
+                transaction.getVendor(),
+                transaction.getDescription(),
+                transaction.getAmount());
+        writer.write(line);
+        writer.newLine();  // Ensures each transaction is on a new line
+    } catch (IOException e) {
+        System.out.println("Error writing to file: " + e.getMessage());
+    }
+
     System.out.println("Transaction saved!");
 }
 }
+
