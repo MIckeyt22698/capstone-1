@@ -19,14 +19,14 @@ SCREENSHOTS
     3) View Ledger
     4) Exit
   Select an option:
-
+-----------------------------
   === Ledger Menu ===
     1) View All Transactions
     2) View Deposits Only
     3) View Payments Only
     4) View Reports
     5) Return to Home Screen
-
+-----------------------------
     === Reports Menu ===
     1) Month To Date
     2) Previous Month
