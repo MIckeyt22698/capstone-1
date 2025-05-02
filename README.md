@@ -41,7 +41,7 @@ Console Color Customization with ANSI Codes
 
 This snippet demonstrates how color is added to the console output
  using ANSI escape codes. This improves user experience by visually distinguishing menu options.
-
+{
 public class ConsoleColors {
     public static final String RESET = "[0m";
     public static final String RED = "[31m";
@@ -51,7 +51,7 @@ public class ConsoleColors {
     public static final String PURPLE = "[35m";
     public static final String CYAN = "[36m";
     public static final String WHITE = "[37m";
-}
+}}
 
 By using these constants throughout the application, the UI becomes more engaging 
 and helps users navigate the menu more easily
