@@ -12,24 +12,24 @@ All transaction data is saved to and loaded from a CSV file (ledger.csv) to ensu
 across sessions.
 -------------------------------------------------------------------------------------------------------
 SCREENSHOTS
-<pre> ```
+```java
 === Home Screen ===
     1) Add Deposit
     2) Make Payment
     3) View Ledger
     4) Exit
   Select an option:
-  ``` <pre>
+  ```
 -----------------------------
-<pre> ```
+```java
   === Ledger Menu ===
     1) View All Transactions
     2) View Deposits Only
     3) View Payments Only
     4) View Reports
     5) Return to Home Screen
-``` <pre>
-<pre> ```
+```
+```java
     === Reports Menu ===
     1) Month To Date
     2) Previous Month
@@ -37,7 +37,7 @@ SCREENSHOTS
     4) Previous Year
     5) Search by Vendor
     0) Back to Ledger Menu
-``` <pre>
+```
 -----------------------------------------------------------------------------------------------------
 Notable Code Snippet
 
@@ -45,7 +45,7 @@ Console Color Customization with ANSI Codes
 
 This snippet demonstrates how color is added to the console output
  using ANSI escape codes. This improves user experience by visually distinguishing menu options.
-{
+```java
 public class ConsoleColors {
     public static final String RESET = "[0m";
     public static final String RED = "[31m";
@@ -55,7 +55,8 @@ public class ConsoleColors {
     public static final String PURPLE = "[35m";
     public static final String CYAN = "[36m";
     public static final String WHITE = "[37m";
-}}
+}
+```
 
 By using these constants throughout the application, the UI becomes more engaging 
 and helps users navigate the menu more easily
