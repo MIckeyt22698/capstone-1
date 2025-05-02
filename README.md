@@ -4,10 +4,14 @@ Project Overview
 
 This Ledger Application is a console-based Java program designed to manage
 financial transactions for personal or small business use. Users can:
-Record deposits and payments
-View all transactions, deposits, or payments
+
+Record deposits and payments.
+
+View all transactions, deposits, or payments.
+
 Generate financial reports (Month-to-Date, Previous Month, Year-to-Date, Previous Year)
-Search transactions by vendor name
+Search transactions by vendor name.
+
 All transaction data is saved to and loaded from a CSV file (ledger.csv) to ensure persistence 
 across sessions.
 -------------------------------------------------------------------------------------------------------
