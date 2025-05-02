@@ -60,7 +60,7 @@ public class App {
                     Transactions t = new Transactions(date, amount, vendor, description);
                     ledger.add(t);
                 }
-                
+
             }
         } catch (FileNotFoundException e) {
             System.out.println("No ledger file found. A new one will be created.");
