@@ -26,7 +26,7 @@ SCREENSHOTS
     3) View Payments Only
     4) View Reports
     5) Return to Home Screen
------------------------------
+<pre> ```
     === Reports Menu ===
     1) Month To Date
     2) Previous Month
@@ -34,6 +34,7 @@ SCREENSHOTS
     4) Previous Year
     5) Search by Vendor
     0) Back to Ledger Menu
+``` <pre>
 -----------------------------------------------------------------------------------------------------
 Notable Code Snippet
 
