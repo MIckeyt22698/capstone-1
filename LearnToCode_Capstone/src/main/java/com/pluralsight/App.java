@@ -13,15 +13,14 @@ public class App {
 
 
     public static void main(String[] args) {
-        loadTransactions();
+        loadTransactions();// Load transactions from file when the program starts
 
 //      keeps the program running until the user chooses to exit.
         boolean running = true;
         while (running) {
-            homeScreen();
-//            Calling homescreen method below
+            homeScreen();// Calling homeScreen method below
             int selectedMenuOption = keystrokes.nextInt();
-            keystrokes.nextLine();
+            keystrokes.nextLine();// Consume newline character
 
             switch (selectedMenuOption) {
                 case 1:
@@ -58,7 +57,7 @@ public class App {
                     double amount = Double.parseDouble(parts[3].trim());
 
                     Transactions t = new Transactions(date, amount, vendor, description);
-                    ledger.add(t);
+                    ledger.add(t);// Add each transaction to the ledger
                 }
 
             }
@@ -92,7 +91,7 @@ public class App {
         String description = keystrokes.nextLine();
 
         Transactions newDeposit = new Transactions(LocalDateTime.now(), amount, vendor, description);
-        saveTransaction(newDeposit);
+        saveTransaction(newDeposit);// Save the new deposit transaction
 
         promptReturnToMenu();
 //        it prompts the user for the deposit amount, vendor, and description, creates a new Transactions object
@@ -159,6 +158,7 @@ public class App {
             }
         }
     }
+    // ConsoleColors class provides ANSI escape codes to change text colors in the console.
     public class ConsoleColors {
         public static final String RESET = "\u001B[0m";
         public static final String RED = "\u001B[31m";
@@ -169,6 +169,7 @@ public class App {
         public static final String CYAN = "\u001B[36m";
         public static final String WHITE = "\u001B[37m";
     }
+    // Methods for displaying reports like "Month to Date," "Previous Month," etc.
     public static void viewReports() {
         boolean viewingReports = true;
 
