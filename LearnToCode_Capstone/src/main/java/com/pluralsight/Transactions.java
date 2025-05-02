@@ -9,8 +9,8 @@ public class Transactions {
     String vendor;
     double amount;
 
-    public Transactions(LocalDateTime transTime,double amount, String vendor, String description) {
-        this.transTime = LocalDateTime.now();
+    public Transactions(LocalDateTime transTime, double amount, String vendor, String description) {
+        this.transTime = transTime;
         this.amount = amount;
         this.vendor = vendor;
         this.description = description;

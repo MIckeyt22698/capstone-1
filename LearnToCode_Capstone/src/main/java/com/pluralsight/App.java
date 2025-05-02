@@ -1,7 +1,6 @@
 package com.pluralsight;
 
 import java.io.*;
-import java.nio.Buffer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -58,9 +57,10 @@ public class App {
                     String description = parts[2].trim();
                     double amount = Double.parseDouble(parts[3].trim());
 
-                    Transactions t = new Transactions(LocalDateTime.now(), amount, vendor, description);
+                    Transactions t = new Transactions(date, amount, vendor, description);
                     ledger.add(t);
                 }
+                
             }
         } catch (FileNotFoundException e) {
             System.out.println("No ledger file found. A new one will be created.");
