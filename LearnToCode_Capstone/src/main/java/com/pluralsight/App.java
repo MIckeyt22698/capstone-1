@@ -70,12 +70,12 @@ public class App {
 
 
     public static void homeScreen() {
-        System.out.println("\n=== Home Screen ===" + ConsoleColors.BLUE);
-        System.out.println("    1) Add Deposit" + ConsoleColors.BLUE);
-        System.out.println("    2) Make Payment" + ConsoleColors.BLUE);
+        System.out.println("\n=== Home Screen ===" + ConsoleColors.CYAN);
+        System.out.println("    1) Add Deposit" + ConsoleColors.CYAN);
+        System.out.println("    2) Make Payment" + ConsoleColors.CYAN);
         System.out.println("    3) View Ledger" + ConsoleColors.PURPLE);
         System.out.println("    4) Exit" + ConsoleColors.RED);
-        System.out.print("  Select an option: " + ConsoleColors.BLUE);}
+        System.out.print("  Select an option: " + ConsoleColors.CYAN);}
 //    Displays the main menu options to the user
 //    It prompts the user to select an option by typing a number.
 
@@ -127,9 +127,9 @@ public class App {
 
         while (viewing) {
             System.out.println( "\n=== Ledger Menu ===");
-            System.out.println("    1) View All Transactions"+ ConsoleColors.BLUE);
-            System.out.println("    2) View Deposits Only"+ ConsoleColors.BLUE);
-            System.out.println("    3) View Payments Only"+ ConsoleColors.BLUE);
+            System.out.println("    1) View All Transactions"+ ConsoleColors.CYAN);
+            System.out.println("    2) View Deposits Only"+ ConsoleColors.CYAN);
+            System.out.println("    3) View Payments Only"+ ConsoleColors.CYAN);
             System.out.println("    4) View Reports"+ ConsoleColors.RED);
             System.out.println("    5) Return to Home Screen"+ ConsoleColors.PURPLE);
             System.out.print("    Select an option: "+ ConsoleColors.RED);
@@ -174,12 +174,12 @@ public class App {
         boolean viewingReports = true;
 
         while (viewingReports) {
-            System.out.println("\n=== Reports Menu ===" + ConsoleColors.BLUE);
-            System.out.println("    1) Month To Date" + ConsoleColors.BLUE);
-            System.out.println("    2) Previous Month" + ConsoleColors.BLUE);
-            System.out.println("    3) Year To Date" + ConsoleColors.BLUE);
-            System.out.println("    4) Previous Year" + ConsoleColors.BLUE);
-            System.out.println("    5) Search by Vendor" + ConsoleColors.BLUE);
+            System.out.println("\n=== Reports Menu ===" + ConsoleColors.CYAN);
+            System.out.println("    1) Month To Date" + ConsoleColors.CYAN);
+            System.out.println("    2) Previous Month" + ConsoleColors.CYAN);
+            System.out.println("    3) Year To Date" + ConsoleColors.CYAN);
+            System.out.println("    4) Previous Year" + ConsoleColors.CYAN);
+            System.out.println("    5) Search by Vendor" + ConsoleColors.CYAN);
             System.out.println("    0) Back to Ledger Menu" + ConsoleColors.RED);
             System.out.print("  Select an option: " + ConsoleColors.PURPLE);
 
