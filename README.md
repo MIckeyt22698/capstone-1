@@ -12,20 +12,23 @@ All transaction data is saved to and loaded from a CSV file (ledger.csv) to ensu
 across sessions.
 -------------------------------------------------------------------------------------------------------
 SCREENSHOTS
-
+<pre> ```
 === Home Screen ===
     1) Add Deposit
     2) Make Payment
     3) View Ledger
     4) Exit
   Select an option:
+  ``` <pre>
 -----------------------------
+<pre> ```
   === Ledger Menu ===
     1) View All Transactions
     2) View Deposits Only
     3) View Payments Only
     4) View Reports
     5) Return to Home Screen
+``` <pre>
 <pre> ```
     === Reports Menu ===
     1) Month To Date
