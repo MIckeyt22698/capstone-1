@@ -43,6 +43,7 @@ public class App {
             }
         }
     }
+
     public static void loadTransactions() {
         try (BufferedReader reader = new BufferedReader(new FileReader("ledger.csv"))) {
             String line;
@@ -75,12 +76,13 @@ public class App {
         System.out.println("    2) Make Payment" + ConsoleColors.CYAN);
         System.out.println("    3) View Ledger" + ConsoleColors.PURPLE);
         System.out.println("    4) Exit" + ConsoleColors.RED);
-        System.out.print("  Select an option: " + ConsoleColors.CYAN);}
+        System.out.print("  Select an option: " + ConsoleColors.CYAN);
+    }
 //    Displays the main menu options to the user
 //    It prompts the user to select an option by typing a number.
 
 
-    public static void addDeposit (){
+    public static void addDeposit() {
         System.out.println("\n=== Add Deposit ===");
         System.out.print("Enter deposit amount: ");
         double amount = keystrokes.nextDouble();
@@ -110,7 +112,7 @@ public class App {
         String description = keystrokes.nextLine();
 
         // Payments are negative amounts
-        Transactions newPayment = new Transactions(LocalDateTime.now(),-amount, vendor, description);
+        Transactions newPayment = new Transactions(LocalDateTime.now(), -amount, vendor, description);
         saveTransaction(newPayment);
 
         promptReturnToMenu();
@@ -126,13 +128,13 @@ public class App {
 //         It uses a while loop to keep the menu active until the user decides to exit.
 
         while (viewing) {
-            System.out.println( "\n=== Ledger Menu ===");
-            System.out.println("    1) View All Transactions"+ ConsoleColors.CYAN);
-            System.out.println("    2) View Deposits Only"+ ConsoleColors.CYAN);
-            System.out.println("    3) View Payments Only"+ ConsoleColors.CYAN);
-            System.out.println("    4) View Reports"+ ConsoleColors.RED);
-            System.out.println("    5) Return to Home Screen"+ ConsoleColors.PURPLE);
-            System.out.print("    Select an option: "+ ConsoleColors.RED);
+            System.out.println("\n=== Ledger Menu ===");
+            System.out.println("    1) View All Transactions" + ConsoleColors.CYAN);
+            System.out.println("    2) View Deposits Only" + ConsoleColors.CYAN);
+            System.out.println("    3) View Payments Only" + ConsoleColors.CYAN);
+            System.out.println("    4) View Reports" + ConsoleColors.RED);
+            System.out.println("    5) Return to Home Screen" + ConsoleColors.PURPLE);
+            System.out.print("    Select an option: " + ConsoleColors.RED);
 
             int choice = keystrokes.nextInt();
             keystrokes.nextLine(); // consume leftover newline
@@ -158,6 +160,7 @@ public class App {
             }
         }
     }
+
     // ConsoleColors class provides ANSI escape codes to change text colors in the console.
     public class ConsoleColors {
         public static final String RESET = "\u001B[0m";
@@ -169,6 +172,7 @@ public class App {
         public static final String CYAN = "\u001B[36m";
         public static final String WHITE = "\u001B[37m";
     }
+
     // Methods for displaying reports like "Month to Date," "Previous Month," etc.
     public static void viewReports() {
         boolean viewingReports = true;
@@ -210,6 +214,7 @@ public class App {
             }
         }
     }
+
     public static void showMonthToDate() {
         System.out.println("\n=== Month To Date ===");
         LocalDateTime now = LocalDateTime.now();
@@ -272,67 +277,67 @@ public class App {
         }
     }
 
-public static void printAllTransactions() {
-    System.out.println("\n=== All Transactions ===");
-    for (Transactions t : ledger) {
-        printTransaction(t);
+    public static void printAllTransactions() {
+        System.out.println("\n=== All Transactions ===");
+        for (Transactions t : ledger) {
+            printTransaction(t);
 //        Prints all transactions stored in the ledger
-    }
-}
-
-
-public static void printDepositsOnly() {
-    System.out.println("\n=== Deposits Only ===");
-    for (Transactions t : ledger) {
-        if (t.getAmount() > 0) { // Deposits are positive
-            printTransaction(t);
         }
+    }
+
+
+    public static void printDepositsOnly() {
+        System.out.println("\n=== Deposits Only ===");
+        for (Transactions t : ledger) {
+            if (t.getAmount() > 0) { // Deposits are positive
+                printTransaction(t);
+            }
 //        Prints only transactions where the amount is greater than zero (deposits).
-    }
-}
-
-public static void printPaymentsOnly() {
-    System.out.println("\n=== Payments Only ===");
-    for (Transactions t : ledger) {
-        if (t.getAmount() < 0) { // Payments are negative
-            printTransaction(t);
-//            Prints only transactions where the amount is less than zero (payments).
         }
     }
-}
 
-public static void printTransaction(Transactions t) {
-    System.out.printf("%s | %s | %s | $%.2f\n",
-            t.getFormattedDate(),
-            t.getVendor(),
-            t.getDescription(),
-            t.getAmount());
-//    Helper method that prints a single Transactions object in a formatted way.
-}
-
-public static void promptReturnToMenu() {
-    System.out.println("\nPress ENTER to return to the Home Screen...");
-    keystrokes.nextLine();
-}
-
-public static void saveTransaction(Transactions transaction) {
-    ledger.add(transaction); // Still need CSV DONT FORGET!
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter("ledger.csv", true))) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
-
-        // Writes the transaction as a line in the CSV file
-        String line = String.format("%s | %s | %s | %.2f",
-                transaction.getFormattedDate(),
-                transaction.getVendor(),
-                transaction.getDescription(),
-                transaction.getAmount());
-        writer.write(line);
-        writer.newLine();  // Ensures each transaction is on a new line
-    } catch (IOException e) {
-        System.out.println("Error writing to file: " + e.getMessage());
+    public static void printPaymentsOnly() {
+        System.out.println("\n=== Payments Only ===");
+        for (Transactions t : ledger) {
+            if (t.getAmount() < 0) { // Payments are negative
+                printTransaction(t);
+//            Prints only transactions where the amount is less than zero (payments).
+            }
+        }
     }
 
-    System.out.println("Transaction saved!");
-}
+    public static void printTransaction(Transactions t) {
+        System.out.printf("%s | %s | %s | $%.2f\n",
+                t.getFormattedDate(),
+                t.getVendor(),
+                t.getDescription(),
+                t.getAmount());
+//    Helper method that prints a single Transactions object in a formatted way.
+    }
+
+    public static void promptReturnToMenu() {
+        System.out.println("\nPress ENTER to return to the Home Screen...");
+        keystrokes.nextLine();
+    }
+
+    public static void saveTransaction(Transactions transaction) {
+        ledger.add(transaction); // Still need CSV DONT FORGET!
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("ledger.csv", true))) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
+
+            // Writes the transaction as a line in the CSV file
+            String line = String.format("%s | %s | %s | %.2f",
+                    transaction.getFormattedDate(),
+                    transaction.getVendor(),
+                    transaction.getDescription(),
+                    transaction.getAmount());
+            writer.write(line);
+            writer.newLine();  // Ensures each transaction is on a new line
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
+
+        System.out.println("Transaction saved!");
+    }
 }
 
